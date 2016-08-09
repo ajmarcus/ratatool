@@ -1,0 +1,257 @@
+<?xml version="1.0"?>
+<!-- NOTE:  This file is managed by Puppet. -->
+
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+
+  <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://hadoopha/</value>
+  </property>
+
+  <property>
+    <name>hadoop.tmp.dir</name>
+    <value>/tmp/hadoop/</value>
+  </property>
+
+  <property>
+    <name>io.file.buffer.size</name>
+    <value>65536</value>
+  </property>
+
+  <property>
+    <name>io.compression.codecs</name>
+    <value>org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,org.apache.hadoop.io.compress.SnappyCodec,org.apache.hadoop.io.compress.BZip2Codec</value>
+  </property>
+
+  <property>
+    <name>io.serializations</name>
+    <value>org.apache.hadoop.io.serializer.WritableSerialization</value>
+    <description>A list of serialization classes that can be used for
+    obtaining serializers and deserializers.</description>
+  </property>
+
+  <property>
+    <name>fs.trash.interval</name>
+    <value>1440</value>
+  </property>
+
+  <property>
+    <name>fs.trash.checkpoint.interval</name>
+    <value>60</value>
+  </property>
+
+  <property>
+    <name>ipc.client.idlethreshold</name>
+    <value>10000</value>
+  </property>
+
+  <property>
+    <name>ipc.server.listen.queue.size</name>
+    <value>10000</value>
+  </property>
+
+  <property>
+    <name>ipc.maximum.data.length</name>
+    <value>134217728</value>
+  </property>
+
+  <property>
+    <name>topology.script.file.name</name>
+    <value>/etc/hadoop/conf/topo.sh</value>
+  </property>
+
+  <property>
+    <name>ha.failover-controller.new-active.rpc-timeout.ms</name>
+    <value>1200000</value>
+    <description>
+      Timeout that the FC waits for the new active to become active
+    </description>
+  </property>
+
+  <property>
+    <name>ha.failover-controller.cli-check.rpc-timeout.ms</name>
+    <value>600000</value>
+    <description>
+      Timeout that the CLI (manual) FC waits for monitorHealth, getServiceState
+    </description>
+  </property>
+
+  <property>
+    <name>ha.failover-controller.graceful-fence.rpc-timeout.ms</name>
+    <value>30000</value>
+    <description>
+      Timeout that the FC waits for the old active to go to standby
+    </description>
+  </property>
+
+  <property>
+    <name>ha.health-monitor.rpc-timeout.ms</name>
+    <value>420000</value>
+    <description>
+      Timeout for the actual monitorHealth() calls.
+    </description>
+  </property>
+
+  <property>
+    <name>hadoop.rpc.protection</name>
+    <value>authentication</value>
+  </property>
+
+  <property>
+    <name>hadoop.security.authentication</name>
+    <value>simple</value>
+  </property>
+
+  <property>
+    <name>hadoop.security.authorization</name>
+    <value>false</value>
+  </property>
+
+  <property>
+    <name>hadoop.security.auth_to_local</name>
+    <value>
+        RULE:[2:$1@$0]([rn]m@.*)s/.*/yarn/
+        RULE:[2:$1@$0](jhs@.*)s/.*/mapred/
+        RULE:[2:$1@$0]([nd]n@.*)s/.*/hdfs/
+        RULE:[2:$1@$0](hm@.*)s/.*/hbase/
+        RULE:[2:$1@$0](rs@.*)s/.*/hbase/
+        DEFAULT</value>
+  </property>
+
+  <!-- Hue WebHDFS proxy user -->
+  <property>
+    <name>hadoop.proxyuser.hue.hosts</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.hue.groups</name>
+    <value>*</value>
+  </property>
+
+  <property>
+    <name>hadoop.proxyuser.httpfs.hosts</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.httpfs.groups</name>
+    <value>*</value>
+  </property>
+
+  <property>
+    <name>hadoop.proxyuser.hcat.groups</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.hcat.hosts</name>
+    <value>*</value>
+  </property>
+
+  <property>
+    <name>hadoop.proxyuser.hive.groups</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.hive.hosts</name>
+    <value>*</value>
+  </property>
+
+  <property>
+    <name>hadoop.proxyuser.apache_falcon.groups</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.apache_falcon.hosts</name>
+    <value>*</value>
+  </property>
+
+  <property>
+    <name>hadoop.proxyuser.oozie.groups</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.oozie.hosts</name>
+    <value>*</value>
+  </property>
+
+
+  <property>
+    <name>fs.gs.impl</name>
+    <value>com.google.cloud.hadoop.fs.gcs.GoogleHadoopFileSystem</value>
+    <description>The FileSystem for gs: (GCS) uris.</description>
+  </property>
+  <property>
+    <name>fs.AbstractFileSystem.gs.impl</name>
+    <value>com.google.cloud.hadoop.fs.gcs.GoogleHadoopFS</value>
+    <description>
+      The AbstractFileSystem for gs: (GCS) uris. Only necessary for use with Hadoop 2.
+    </description>
+  </property>
+
+  <property>
+    <name>fs.gs.project.id</name>
+    <value>on-premise-hadoop</value>
+  </property>
+
+  <property>
+    <name>fs.gs.working.dir</name>
+    <value>/</value>
+  </property>
+
+  <!-- ServiceAccount Configuration for Google Storage connector -->
+  <property>
+    <name>fs.gs.auth.service.account.enable</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>fs.gs.auth.service.account.email</name>
+    <value>932746659233-dr8b21j3o5roini819f5rromfctiq1tp@developer.gserviceaccount.com</value>
+  </property>
+  <property>
+    <name>fs.gs.auth.service.account.keyfile</name>
+    <value>/etc/hadoop/conf/gcp_key.p12</value>
+  </property>
+
+  <!-- ServiceAccount Configuration for BigQuery connector -->
+  <property>
+    <name>mapred.bq.auth.service.account.enable</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>mapred.bq.auth.service.account.email</name>
+    <value>932746659233-dr8b21j3o5roini819f5rromfctiq1tp@developer.gserviceaccount.com</value>
+  </property>
+  <property>
+    <name>mapred.bq.auth.service.account.keyfile</name>
+    <value>/etc/hadoop/conf/gcp_key.p12</value>
+  </property>
+  <property>
+    <name>mapred.bq.project.id</name>
+    <value>on-premise-hadoop</value>
+    <description>
+      com.google.cloud.hadoop.io.bigquery.BigQueryConfiguration.PROJECT_ID_KEY JavaDoc.
+      TL/DR - project which executes BQ jobs while exporting data from BQ to GS.
+    </description>
+  </property>
+
+  <property>
+    <name>mapred.bq.gcs.bucket</name>
+    <value>on-premise-bigquery-intermediate</value>
+    <description>
+      Used by BigQuery interop when reading BQ table to dump temporarily data on GS.
+    </description>
+  </property>
+
+  <!-- This config option will have no effect unless you have GCS connector 1.4.5 or later (gcp-hadoop-connector 0.2.2 or later) -->
+  <property>
+    <name>fs.gs.path.encoding</name>
+    <value>uri-path</value>
+    <description>
+      Make GCS connector not break filenames with some uri-encoded entities under certain circumstances.
+    </description>
+  </property>
+
+</configuration>

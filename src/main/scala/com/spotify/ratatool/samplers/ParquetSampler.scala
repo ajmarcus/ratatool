@@ -17,9 +17,12 @@
 
 package com.spotify.ratatool.samplers
 
+import com.spotify.ratatool.GcsConfiguration
 import com.spotify.ratatool.io.ParquetIO
 import org.apache.avro.generic.GenericRecord
 import org.apache.hadoop.fs.Path
+import org.apache.parquet.avro.AvroParquetReader
+import org.apache.parquet.hadoop.ParquetReader
 import org.slf4j.{Logger, LoggerFactory}
 
 import scala.collection.mutable.ListBuffer
@@ -48,4 +51,23 @@ class ParquetSampler(path: Path, protected val seed: Option[Long] = None)
     result
   }
 
+}
+
+object ParquetSampler {
+  def main(args: Array[String]): Unit = {
+    val logger = java.util.logging.Logger.getLogger("org.apache.parquet.CorruptStatistics")
+    logger.setLevel(java.util.logging.Level.OFF)
+
+    val path = "hdfs:///pipeline/entity/v2/track-fast/2016-08-08/part-r-00000.snappy.parquet"
+    val conf = GcsConfiguration.get()
+
+    println("===========")
+    val reader = AvroParquetReader.builder[GenericRecord](new Path(path))
+      .withConf(conf)
+      .build()
+      .asInstanceOf[ParquetReader[GenericRecord]]
+    println("===========")
+    reader.read()
+    println("===========")
+  }
 }
